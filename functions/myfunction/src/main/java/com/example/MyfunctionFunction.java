@@ -51,7 +51,7 @@ public class MyfunctionFunction implements SalesforceFunction<FunctionInput, Fun
 
       accounts.add(new Account(id, name));
     }
-    accounts.add(new Account(1, "Test"));
+    accounts.add(new Account("1", "Test"));
 
     List<String> tests = new ArrayList<>();
     tests.add(test);
