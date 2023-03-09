@@ -27,6 +27,7 @@ public class MyfunctionFunction implements SalesforceFunction<FunctionInput, Fun
       throws Exception {
 
      String test = "";
+         List<Account> accounts = new ArrayList<>();
       PayConfiguration payConfiguration = null;
             try {
                 payConfiguration = new PayConfiguration()
@@ -34,8 +35,10 @@ public class MyfunctionFunction implements SalesforceFunction<FunctionInput, Fun
                     .setRegion(Region.NA)
                     .setPrivateKey("YOUR_PRIVATE_KEY_STRING")
                     .setEnvironment(Environment.SANDBOX);
+                accounts.add(new Account("2", "Test"));
             }catch (AmazonPayClientException e) {
                   test = e.getMessage();
+                  accounts.add(new Account("3", e.getMessage()));
             }
             System.out.println("111 payConfiguration=" + payConfiguration);
 
@@ -44,7 +47,6 @@ public class MyfunctionFunction implements SalesforceFunction<FunctionInput, Fun
 
     LOGGER.info("Function successfully queried {} account records!", records.size());
 
-    List<Account> accounts = new ArrayList<>();
     for (Record record : records) {
       String id = record.getStringField("Id").get();
       String name = record.getStringField("Name").get();
